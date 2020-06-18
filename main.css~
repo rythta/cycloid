@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+}
+
+.row{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
+}
+
+.column{
+    display: flex;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline;
+    height: 100%
+}
+
+.dance {
+    width: 100%
+}
