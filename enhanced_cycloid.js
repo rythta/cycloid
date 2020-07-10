@@ -22,7 +22,7 @@ const gen_torus = gpu.createKernel(function(width, height, i, j,l) {
     
     return 4*(Math.trunc(x)+Math.trunc(y)*width);
 })
-      .setOutput([10000])
+      .setOutput([30000])
 
 function frame() {
     canvas.width = window.innerWidth;
