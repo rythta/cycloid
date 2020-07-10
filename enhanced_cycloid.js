@@ -33,7 +33,7 @@ function frame() {
     var torus = gen_torus(canvas.width, canvas.height, i, j, l);
     
     for (var location = 0; location < torus.length; location++)
-	imageData.data.set([0, 0, 0, 225], torus[location]);
+	imageData.data.set([255, 255, 255, 225], torus[location]);
 
     j += 0;
     l += 0.01;
