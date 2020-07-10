@@ -1,0 +1,27 @@
+var canvas = document.getElementById("canvas");
+var tick = setInterval(frame, 1000);
+var imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+var data = imageData.data;
+var resolution = 100000;
+
+const gpu = new GPU();
+
+const render = gpu.createKernel(function(param, rotation, size) {
+
+    
+    var index = (Math.trunc(y) * canvasWidth + Math.trunc(x)) * 4;
+    return [index, color];
+})
+      .setOutput([resolution])
+
+var cycloid = render(canvasWidth, resolution);
+
+for (var i = 0; i < resolution; i++) {
+    var index = cycloid[i];
+    data[index]   = 0;
+    data[++index] = 0;
+    data[++index] = 0;
+    data[++index] = 255;
+}
+
+ctx.putImageData(imageData, 0, 0);

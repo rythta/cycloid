@@ -1,6 +1,6 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-var tick = setInterval(frame, 10);
+var tick = setInterval(frame, 1000);
 var r = Math.random()*100;
 var q = 1/(Math.random()*5);
 
@@ -16,7 +16,7 @@ function torus(param, rotation, size) {
     var sin = Math.sin(q*param);
 
     var x = space*Math.cos(0.5*param)+space/3*Math.cos(q*param+rotation);
-    var y = space*Math.sin(param+rotation)+space/3*Math.sin(q*param+rotation);;
+    var y = space*Math.sin(param+rotation)+space/3*Math.sin(q*param+rotation);
     var color = [sin*125+125,cos*125+125,cos*sin*125+125,255];
     return [color, x+size[0]/2, y+size[1]/2];
 
