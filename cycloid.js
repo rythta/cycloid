@@ -1,6 +1,6 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-var tick = setInterval(frame, 1000);
+var tick = setInterval(frame, 1);
 var r = Math.random()*100;
 var q = 1/(Math.random()*5);
 
@@ -11,7 +11,7 @@ function torus(param, rotation, size) {
     }else{
 	space = size[1]/4;
     }
-
+    
     var cos = Math.cos(q*param);
     var sin = Math.sin(q*param);
 
