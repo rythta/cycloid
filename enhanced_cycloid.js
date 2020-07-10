@@ -7,7 +7,11 @@ var l = 0;
 const gpu = new GPU();
 
 const gen_torus = gpu.createKernel(function(width, height, i, j,l) {
-    var space = width / 6;
+    var space = height/6;
+    
+    if (width < height)
+	space = width/6;
+    
     var t = this.thread.x/10;
 
     var x = space*((1+Math.pow(Math.sin(t/i+l),2))*cos(t)+cos(j*t+.75-l));
