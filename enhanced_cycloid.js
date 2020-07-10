@@ -1,7 +1,7 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 var tick = setInterval(frame, 16);
-var i = 100;
+var i = 4.6;
 var j = -0.5;
 var l = 0;
 const gpu = new GPU();
@@ -22,7 +22,7 @@ const gen_torus = gpu.createKernel(function(width, height, i, j,l) {
     
     return 4*(Math.trunc(x)+Math.trunc(y)*width);
 })
-      .setOutput([20000])
+      .setOutput([10000])
 
 function frame() {
     canvas.width = window.innerWidth;
