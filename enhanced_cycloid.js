@@ -1,38 +1,38 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-var tick = setInterval(frame, 10);
-var rotation = 0;
-var curl = 0.09;
+var tick = setInterval(frame, 16);
+var i = 100;
+var j = -0.5;
+var l = 0;
 const gpu = new GPU();
 
-const gen_torus = gpu.createKernel(function(width, height, rotation, curl) {
-    var space = width / 4;
-    var param = this.thread.x / (width / 1.75);
+const gen_torus = gpu.createKernel(function(width, height, i, j,l) {
+    var space = width / 6;
+    var t = this.thread.x/10;
 
-    var x = space*Math.cos(0.5*param)+space/3*Math.cos(curl*param+rotation);
-    var y = space*Math.sin(param+rotation)+space/3*Math.sin(curl*param+rotation);
+    var x = space*((1+Math.pow(Math.sin(t/i+l),2))*cos(t)+cos(j*t+.75-l));
+    var y = space*((1+Math.pow(Math.sin(t/i+l),2))*sin(t)+sin(j*t+.75+l));
 
     x += (width/2);
     y += (height/2);
     
     return 4*(Math.trunc(x)+Math.trunc(y)*width);
 })
-      .setDynamicOutput(true)
+      .setOutput([10000])
 
 function frame() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    gen_torus.setOutput([canvas.width*150]);
     
     imageData = context.createImageData(canvas.width, canvas.height);
     
-    var torus = gen_torus(canvas.width, canvas.height, rotation, curl);
+    var torus = gen_torus(canvas.width, canvas.height, i, j, l);
     
-    for (var i = 0; i < torus.length; i++)
-	imageData.data.set([0, 0, 0, 225], torus[i]);
+    for (var location = 0; location < torus.length; location++)
+	imageData.data.set([0, 0, 0, 225], torus[location]);
 
-    rotation += 0.01;
-    curl += 0;
+    j += 0;
+    l += 0.01;
     
     context.putImageData(imageData, 0,0);
 }
