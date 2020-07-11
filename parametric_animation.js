@@ -36,7 +36,17 @@ function frame() {
 	imageData.data.set([255, 255, 255, 225], torus[location]);
 
     j += 0;
-    l += 0.01;
+    l += 0.003;
     
     context.putImageData(imageData, 0,0);
 }
+
+function stop_animation(event) {
+    if (event.deltaY > 0) {
+	clearInterval(tick);
+	document.body.style.backgroundColor="white";
+    }
+}
+
+const el = document.body;
+el.onwheel = stop_animation;
